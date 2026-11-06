@@ -1,0 +1,89 @@
+
+/* Pengaturan dasar */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Tampilan halaman */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f7eee8;
+    color: #49352d;
+    line-height: 1.7;
+}
+
+/* Bagian header */
+header {
+    background-color: #a65f46;
+    color: white;
+    text-align: center;
+    padding: 40px 20px;
+}
+
+header h1 {
+    margin-bottom: 10px;
+}
+
+/* Bagian isi */
+.container {
+    width: 85%;
+    max-width: 850px;
+    margin: 30px auto;
+}
+
+/* Setiap bagian konten */
+section {
+    background-color: white;
+    padding: 25px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+}
+
+/* Judul bagian */
+h2 {
+    color: #a65f46;
+    margin-bottom: 12px;
+}
+
+/* Tabel biodata */
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+td {
+    border: 1px solid #dfc9bd;
+    padding: 10px;
+}
+
+td:first-child {
+    background-color: #f3e2d8;
+    font-weight: bold;
+    width: 35%;
+}
+
+/* Daftar hobi */
+ul {
+    padding-left: 25px;
+}
+
+/* Bagian footer */
+footer {
+    background-color: #a65f46;
+    color: white;
+    text-align: center;
+    padding: 15px;
+}
+
+/* Tampilan pada layar kecil */
+@media screen and (max-width: 600px) {
+    .container {
+        width: 92%;
+    }
+
+    header h1 {
+        font-size: 25px;
+    }
+}
