@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profil Kampus FKOM &amp; Direktori Alumni - Universitas Kuningan</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Segoe UI", Arial, sans-serif;
+            margin: 0;
+            background-color: #fdf6f2;
+            color: #2c221e;
+            line-height: 1.6;
+        }
+
+        header {
+            background-color: #b85032;
+            color: #fffaf7;
+            padding: 24px;
+        }
+
+        .wrap {
+            max-width: 1160px;
+            margin: 0 auto;
+        }
+
+        header h1 {
+            margin: 0 0 4px 0;
+            font-size: 24px;
+        }
+
+        header p {
+            margin: 2px 0;
+            font-size: 13.5px;
+            color: #fde8df;
+        }
+
+        nav {
+            margin-top: 14px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .nav-btn {
+            color: #fffaf7;
+            background-color: rgba(255, 250, 247, 0.16);
+            border: 1px solid rgba(255, 250, 247, 0.35);
+            padding: 7px 14px;
+            border-radius: 6px;
+            font-size: 13px;
+            cursor: pointer;
+        }
+
+        .nav-btn:hover {
+            background-color: #fffaf7;
+            color: #9a3f25;
+        }
+
+        main {
+            padding: 24px;
+        }
+
+        section.bagian-konten {
+            display: block;
+            background-color: #ffffff;
+            border: 1px solid #edd6cb;
+            border-radius: 12px;
+            padding: 22px;
+            margin-bottom: 24px;
+        }
+
+        .section-title {
+            margin: 0 0 14px 0;
+            font-size: 20px;
+            color: #9a3f25;
+            border-left: 4px solid #c85a32;
+            padding-left: 10px;
+        }
+
+        dl dt {
+            font-weight: 700;
+            color: #9a3f25;
+            margin-top: 10px;
+        }
+
+        dl dd {
+            margin-left: 0;
+            margin-top: 4px;
+        }
+
+        .sub-block {
+            margin-top: 12px;
+            padding-top: 10px;
+            border-top: 1px dashed #edd6cb;
+        }
+
+        .sub-heading {
+            font-weight: 700;
+            color: #2c221e;
+            margin-bottom: 6px;
+            display: block;
+        }
+
+        .prodi-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 14px;
+        }
+
+        .prodi-card {
+            background-color: #fff8f5;
+            border: 1px solid #f0d2c4;
+            border-radius: 10px;
+            padding: 15px;
+        }
+
+        .prodi-card h3 {
+            margin: 0 0 6px 0;
+            color: #9a3f25;
+            font-size: 16px;
+        }
+
+        .prodi-card p {
+            margin: 4px 0;
+            font-size: 13.5px;
+        }
+
+        .table-wrapper {
+            overflow-x: auto;
+        }
+
+        table.dosen-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+        }
+
+        table.dosen-table caption {
+            text-align: left;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        table.dosen-table th,
+        table.dosen-table td {
+            border: 1px solid #e4c6b8;
+            padding: 9px 12px;
+            text-align: left;
+        }
+
+        table.dosen-table th {
+            background-color: #b85032;
+            color: #fffaf7;
+        }
+
+        table.dosen-table tr:nth-child(even) {
+            background-color: #fff9f6;
+        }
+
+        fieldset {
+            border: 1px solid #e4c6b8;
+            border-radius: 8px;
+            padding: 16px;
+        }
+
+        legend {
+            font-weight: 700;
+            color: #9a3f25;
+            padding: 0 8px;
+        }
+
+        .form-row {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .form-row label.field-label,
+        .form-row span.field-label {
+            width: 140px;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .form-row input[type="text"],
+        .form-row input[type="date"],
+        .form-row input[type="email"],
+        .form-row textarea {
+            flex: 1 1 220px;
+            max-width: 400px;
+            padding: 8px 10px;
+            border: 1px solid #dfb9a8;
+            border-radius: 6px;
+            font-size: 14px;
+            font-family: inherit;
+        }
+
+        .btn-submit {
+            background-color: #b85032;
+            color: #fffaf7;
+            border: none;
+            padding: 9px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .btn-submit:hover {
+            background-color: #8f3920;
+        }
+
+        #hasilForm {
+            margin-top: 10px;
+            font-size: 13.5px;
+            color: #8f3920;
+            font-weight: 600;
+        }
+
+        #searchInput {
+            width: 100%;
+            max-width: 440px;
+            padding: 10px 14px;
+            margin-bottom: 16px;
+            border: 1px solid #dfb9a8;
+            border-radius: 8px;
+            font-size: 14px;
+            background-color: #fffdfb;
+        }
+
+        #searchInput:focus {
+            outline: none;
+            border-color: #b85032;
+            box-shadow: 0 0 0 3px rgba(184, 80, 50, 0.14);
+        }
+
+        .alumni-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 15px;
+        }
+
+        .alumni-card {
+            background-color: #fffdfb;
+            padding: 16px;
+            border-radius: 10px;
+            border: 1px solid #edd6cb;
+            transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease, background-color 0.25s ease;
+        }
+
+        .alumni-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 10px 20px rgba(184, 80, 50, 0.16);
+            border-color: #c85a32;
+            background-color: #fff4ef;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 3px 10px;
+            font-size: 12px;
+            font-weight: 600;
+            border-radius: 999px;
+            background-color: #fbe3d8;
+            color: #9a3f25;
+            margin-bottom: 8px;
+        }
+
+        .alumni-card h3 {
+            margin: 0 0 6px 0;
+            font-size: 16px;
+        }
+
+        .alumni-card p {
+            margin: 4px 0;
+            font-size: 13.5px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 18px;
+            font-size: 13px;
+            color: #6b5349;
+            background-color: #ffffff;
+            border-top: 1px solid #edd6cb;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="wrap">
+            <h1>Fakultas Ilmu Komputer — Universitas Kuningan</h1>
+            <p>Jl. Pramuka No.67, Purwawinangun, Kec. Kuningan, Kabupaten Kuningan, Jawa Barat 45512</p>
+            <nav>
+                <button type="button" class="nav-btn" onclick="keBagian('visi-misi')">Visi - Misi</button>
+                <button type="button" class="nav-btn" onclick="keBagian('profil-si')">Profil Prodi SI</button>
+                <button type="button" class="nav-btn" onclick="keBagian('profil-prodi')">4 Program Studi</button>
+                <button type="button" class="nav-btn" onclick="keBagian('daftar-dosen')">Daftar Dosen</button>
+                <button type="button" class="nav-btn" onclick="keBagian('form-biodata')">Form Biodata</button>
+                <button type="button" class="nav-btn" onclick="keBagian('direktori-alumni')">Direktori Alumni</button>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <div class="wrap">
+
+            <section id="visi-misi" class="bagian-konten">
+                <article>
+                    <h2 class="section-title">Visi - Misi</h2>
+                    <dl>
+                        <dt>Visi</dt>
+                        <dd>"Terwujudnya Fakultas Ilmu Komputer Universitas Kuningan sebagai fakultas andal yang unggul dalam penyelenggaraan Tri Darma Perguruan Tinggi di Wilayah Jawa Barat pada tahun 2032"</dd>
+                        <dt>Misi</dt>
+                        <dd>
+                            <ol type="1">
+                                <li>Menyelenggarakan pendidikan, penelitian, dan pengabdian pada masyarakat secara terpadu berdasarkan pada kaidah-kaidah pendidikan modern.</li>
+                                <li>Membina dan mengembangkan kehidupan akademik yang sehat sesuai dengan nilai-nilai dan norma-norma yang berkembang di dunia akademik.</li>
+                                <li>Menyelenggarakan riset-riset ilmiah yang tidak saja mampu mendorong ilmu dan teknologi lagi juga dapat menjamin kebutuhan dunia industri dan bisnis yang berkembang sangat pesat dewasa ini.</li>
+                                <li>Melayani, memandu, dan menyatu dengan masyarakat dalam upaya ikut serta mewujudkan masyarakat baru Indonesia yang adil dan makmur.</li>
+                                <li>Menjadi sarana penggodokan generasi muda sehingga mampu mandiri, profesional dan berakhlak mulia yang bermanfaat bagi dirinya, masyarakat, bangsa, dan negara.</li>
+                                <li>Meningkatkan budaya baca dalam upaya mewujudkan generasi yang memiliki wawasan yang luas dalam bidang IPTEK sesuai dengan minat kajiannya.</li>
+                            </ol>
+                        </dd>
+                    </dl>
+                </article>
+            </section>
+
+            <section id="profil-si" class="bagian-konten">
+                <article>
+                    <h2 class="section-title">Profil Program Studi Sistem Informasi</h2>
+                    <div class="sub-block">
+                        <span class="sub-heading">VISI</span>
+                        <p>Terwujudnya program studi sistem informasi sebagai program studi yang handal dan unggul dalam penyelenggaraan Tri Darma Perguruan Tinggi, unggul di bidang rekayasa sistem informasi di Wilayah Jawa Barat pada tahun 2032.</p>
+                    </div>
+                    <div class="sub-block">
+                        <span class="sub-heading">PROFIL LULUSAN &amp; PILIHAN KARIR</span>
+                        <p>System Analyst, Data Analyst, Chief Information Officer (CIO), Software Quality Assurance.</p>
+                    </div>
+                    <div class="sub-block">
+                        <span class="sub-heading">KEGIATAN MBKM</span>
+                        <ul>
+                            <li>Magang</li>
+                            <li>Studi Independen</li>
+                            <li>Bangkit Academy</li>
+                            <li>Pertukaran Mahasiswa Merdeka (PMM) Nusantara</li>
+                            <li>International Credit Transfer (ICT)</li>
+                        </ul>
+                    </div>
+                    <div class="sub-block">
+                        <span class="sub-heading">PROGRAM UNGGULAN</span>
+                        <ul type="square">
+                            <li>Pertukaran Mahasiswa ke University Utara Malaysia (UUM)</li>
+                            <li>Praktisi/Dosen Kompetensi dari Universitas lain</li>
+                        </ul>
+                    </div>
+                    <div class="sub-block">
+                        <span class="sub-heading">PRESTASI MAHASISWA</span>
+                        <ul type="circle">
+                            <li>Juara 1 lomba Desain Cindramata 2018</li>
+                            <li>Juara Favorit lomba poster STIKKU 2017</li>
+                            <li>Mahasiswa Berprestasi UNIKU 2022</li>
+                            <li>Duta Putra Sosial Kuningan 2022</li>
+                            <li>Juara Lomba LLDIKTI Konsep Garapan Terbaik Tingkat Jabar-Banten 2022</li>
+                            <li>PPK Ormawa</li>
+                        </ul>
+                    </div>
+                    <div class="sub-block">
+                        <span class="sub-heading">SERTIFIKASI</span>
+                        <p>Sertifikasi Kompetensi BNSP (Badan Nasional Sertifikasi Profesi).</p>
+                    </div>
+                </article>
+            </section>
+
+            <section id="profil-prodi" class="bagian-konten">
+                <h2 class="section-title">Profil Program Studi FKOM UNIKU</h2>
+                <p>Fakultas Ilmu Komputer Universitas Kuningan memiliki 4 program studi di bidang teknologi informasi, desain, dan teknik. Berikut adalah profil program studi yang terdapat di Fakultas Ilmu Komputer.</p>
+                <div class="prodi-grid">
+                    <div class="prodi-card">
+                        <h3>1. Teknik Informatika</h3>
+                        <p>Teknik Informatika merupakan program studi yang mempelajari ilmu komputer dan pengembangan teknologi. Hal-hal yang dipelajari di dalamnya, di antaranya: pemrograman, algoritma, rekayasa perangkat lunak, jaringan komputer, kecerdasan buatan, dan masih banyak lagi.</p>
+                        <p><b>Jenjang:</b> Sarjana (S1)</p>
+                        <p><b>Gelar:</b> S.Kom.</p>
+                        <p><b>Contoh prospek kerja:</b> Programmer, Software Developer, Software Quality Assurance, dan lain sebagainya.</p>
+                    </div>
+                    <div class="prodi-card">
+                        <h3>2. Sistem Informasi</h3>
+                        <p>Di dalam prodi Sistem Informasi, mahasiswanya akan mempelajari pemanfaatan teknologi informasi untuk mendukung proses bisnis dan kebutuhan organisasi. Mahasiswa mempelajari analisis sistem, basis data, proses bisnis, pengelolaan informasi, dan masih banyak lagi.</p>
+                        <p><b>Jenjang:</b> Sarjana (S1)</p>
+                        <p><b>Gelar:</b> S.Kom.</p>
+                        <p><b>Contoh prospek kerja:</b> System Analyst, Data Analyst, dan Information Systems Consultant, dan lain sebagainya.</p>
+                    </div>
+                    <div class="prodi-card">
+                        <h3>3. Desain Komunikasi Visual</h3>
+                        <p>Di dalam prodi Desain Komunikasi Visual mempelajari penyampaian pesan melalui media visual. Pembelajarannya mencakup desain grafis, ilustrasi, fotografi, tipografi, multimedia, dan masih banyak lagi.</p>
+                        <p><b>Jenjang:</b> Sarjana (S1)</p>
+                        <p><b>Gelar:</b> S.Ds.</p>
+                        <p><b>Contoh prospek kerja:</b> Desainer Grafis, Ilustrator, Animator, dan Editor Video, dan lain sebagainya.</p>
+                    </div>
+                    <div class="prodi-card">
+                        <h3>4. Teknik Sipil</h3>
+                        <p>Di dalam prodi Teknik Sipil mempelajari perencanaan, perancangan, pembangunan, dan pemeliharaan infrastruktur. Materi pembelajarannya meliputi struktur bangunan, bahan bangunan, transportasi, dan konstruksi, dan yang lainnya.</p>
+                        <p><b>Jenjang:</b> Sarjana (S1)</p>
+                        <p><b>Gelar:</b> S.T.</p>
+                        <p><b>Contoh prospek kerja:</b> Insinyur Sipil, Konsultan Konstruksi, dan Pengawas Proyek, dan lain sebagainya.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="daftar-dosen" class="bagian-konten">
+                <h2 class="section-title">Daftar Dosen</h2>
+                <div class="table-wrapper">
+                    <table class="dosen-table">
+                        <caption>DAFTAR DOSEN — FAKULTAS ILMU KOMPUTER UNIVERSITAS KUNINGAN</caption>
+                        <thead>
+                            <tr>
+                                <th>No.</th>
+                                <th>Nama</th>
+                                <th>Homebase</th>
+                                <th>Rumpun Keilmuan</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1.</td>
+                                <td>Tito Sugiharto, M.Eng.</td>
+                                <td>Teknik Informatika</td>
+                                <td>Computer Engineering</td>
+                            </tr>
+                            <tr>
+                                <td>2.</td>
+                                <td>Erik Kurniadi, M.Kom.</td>
+                                <td>Sistem Informasi</td>
+                                <td>Information System</td>
+                            </tr>
+                            <tr>
+                                <td>3.</td>
+                                <td>Jerry D. Rahajaan, M.Sn.</td>
+                                <td>Desain Komunikasi Visual</td>
+                                <td>Seni, Desain, &amp; Media</td>
+                            </tr>
+                            <tr>
+                                <td>4.</td>
+                                <td>Panji Novantara, M.T.</td>
+                                <td>Teknik Informatika</td>
+                                <td>Computer Science</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <section id="form-biodata" class="bagian-konten">
+                <h2 class="section-title">Form Biodata</h2>
+                <form id="biodataForm" onsubmit="kirimBiodata(event)">
+                    <fieldset>
+                        <legend>Data Diri Mahasiswa / Alumni</legend>
+                        <div class="form-row">
+                            <label class="field-label" for="namaLengkap">Nama Lengkap</label>
+                            <input type="text" id="namaLengkap" name="namaLengkap">
+                        </div>
+                        <div class="form-row">
+                            <label class="field-label" for="tempatLahir">Tempat Lahir</label>
+                            <input type="text" id="tempatLahir" name="tempatLahir">
+                        </div>
+                        <div class="form-row">
+                            <label class="field-label" for="tanggalLahir">Tanggal Lahir</label>
+                            <input type="date" id="tanggalLahir" name="tanggalLahir">
+                        </div>
+                        <div class="form-row">
+                            <span class="field-label">Jenis Kelamin</span>
+                            <div>
+                                <label><input type="radio" name="jenis_kelamin" value="Laki-laki"> Laki-laki</label>
+                                <label style="margin-left: 12px;"><input type="radio" name="jenis_kelamin" value="Perempuan"> Perempuan</label>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <label class="field-label" for="alamat">Alamat</label>
+                            <textarea id="alamat" name="alamat" cols="22" rows="3"></textarea>
+                        </div>
+                        <div class="form-row">
+                            <label class="field-label" for="email">E-mail</label>
+                            <input type="email" id="email" name="email">
+                        </div>
+                        <button type="submit" class="btn-submit">Kirim Data</button>
+                        <div id="hasilForm"></div>
+                    </fieldset>
+                </form>
+            </section>
+
+            <section id="direktori-alumni" class="bagian-konten">
+                <h2 class="section-title">Direktori Alumni</h2>
+                <p>Cari alumni berdasarkan nama, NIM, gelar, prodi (Sistem Informasi, Teknik Informatika, DKV, Teknik Sipil), atau perusahaan.</p>
+                <input type="text" id="searchInput" onkeyup="filterAlumni()" oninput="filterAlumni()" placeholder="Cari berdasarkan nama, NIM, gelar, prodi, atau PT...">
+                <div class="alumni-container" id="alumniContainer"></div>
+            </section>
+
+        </div>
+    </main>
+
+    <footer>
+        Website Profil Kampus &amp; Direktori Alumni — Praktikum Modul 4 JavaScript
+    </footer>
+
+    <script>
+        function keBagian(idTujuan) {
+            var elemen = document.getElementById(idTujuan);
+            if (elemen) {
+                elemen.scrollIntoView({ behavior: "smooth" });
+                elemen.style.borderColor = "#b85032";
+                console.log("Berpindah ke bagian:", idTujuan);
+            }
+        }
+
+        var dataAlumni = [
+            { nama: "Aldi Nur Akbar", nim: "20250910079", gelar: "S.Kom.", prodi: "Sistem Informasi", pt: "PT Bank Central Asia Tbk" },
+            { nama: "Ardika Surya Pratama", nim: "20250910049", gelar: "S.Kom.", prodi: "Teknik Informatika", pt: "PT Telkom Indonesia (Persero) Tbk" },
+            { nama: "Cindy Komalasari", nim: "20250910070", gelar: "S.Ds.", prodi: "DKV", pt: "PT Studio Kreatif Nusantara" },
+            { nama: "Delcio Da Silva Carvalho", nim: "20250910093", gelar: "S.T.", prodi: "Teknik Sipil", pt: "PT Wijaya Karya (Persero) Tbk" },
+            { nama: "Dwi Febriyanti", nim: "20250910062", gelar: "S.Kom.", prodi: "Sistem Informasi", pt: "PT GoTo Gojek Tokopedia Tbk" },
+            { nama: "Enggar Bintang Maha Putra", nim: "20250910077", gelar: "S.Kom.", prodi: "Teknik Informatika", pt: "PT Solusi Digital Mandiri" },
+            { nama: "Fabian Febry Satrio", nim: "20250910030", gelar: "S.Ds.", prodi: "DKV", pt: "PT Visual Media Kreasi" },
+            { nama: "Fabio Alifabiandra", nim: "20250910028", gelar: "S.Kom.", prodi: "Sistem Informasi", pt: "PT Astra Graphia Tbk" },
+            { nama: "Fahmi Daris Fauzan", nim: "20250910018", gelar: "S.Kom.", prodi: "Teknik Informatika", pt: "PT Bukalapak.com Tbk" },
+            { nama: "Ignatius Dadi Ahadiyat", nim: "20250910002", gelar: "S.T.", prodi: "Teknik Sipil", pt: "PT PP (Persero) Tbk" },
+            { nama: "Ikmar Falih Darussalam", nim: "20250910085", gelar: "S.Kom.", prodi: "Sistem Informasi", pt: "PT Bank Rakyat Indonesia (Persero) Tbk" },
+            { nama: "Khairinnissa", nim: "20250910015", gelar: "S.Kom.", prodi: "Sistem Informasi", pt: "PT Nusantara Agro Digital" },
+            { nama: "Mohamad Iqbal Abdul Aziz", nim: "20250910037", gelar: "S.Kom.", prodi: "Teknik Informatika", pt: "PT XL Axiata Tbk" },
+            { nama: "Muhamad Ainur Rofiq", nim: "20250910061", gelar: "S.Ds.", prodi: "DKV", pt: "PT Ruang Karya Desain" },
+            { nama: "Muhamad Mickdad", nim: "20250910012", gelar: "S.T.", prodi: "Teknik Sipil", pt: "PT Adhi Karya (Persero) Tbk" },
+            { nama: "Muhammad Rizki", nim: "20250910075", gelar: "S.Kom.", prodi: "Teknik Informatika", pt: "PT Indosat Ooredoo Hutchison Tbk" },
+            { nama: "Nazwa Dwifa Ramadani", nim: "20250910059", gelar: "S.Ds.", prodi: "DKV", pt: "PT Cipta Grafika Indonesia" },
+            { nama: "Novita Lestari", nim: "20250910082", gelar: "S.Kom.", prodi: "Sistem Informasi", pt: "PT Bank Mandiri (Persero) Tbk" },
+            { nama: "Raihan Raka Alfarizi", nim: "20250910073", gelar: "S.Kom.", prodi: "Teknik Informatika", pt: "PT Metrodata Electronics Tbk" },
+            { nama: "Reinna Valogina", nim: "20250910065", gelar: "S.Ds.", prodi: "DKV", pt: "PT Karsa Visual Studio" },
+            { nama: "Rizal Fadilah", nim: "20250910084", gelar: "S.T.", prodi: "Teknik Sipil", pt: "PT Hutama Karya (Persero)" },
+            { nama: "Rohmat Hidayat Mauludin", nim: "20250910029", gelar: "S.Kom.", prodi: "Sistem Informasi", pt: "PT Daya Adicipta Motora" },
+            { nama: "Ropiyul Karim", nim: "20250910009", gelar: "S.T.", prodi: "Teknik Sipil", pt: "PT Waskita Karya (Persero) Tbk" },
+            { nama: "Yessa Tamelia", nim: "20250910020", gelar: "S.Ds.", prodi: "DKV", pt: "PT Suara Kreatif Indonesia" },
+            { nama: "Yohanes Ricky", nim: "20250910098", gelar: "S.Kom.", prodi: "Teknik Informatika", pt: "PT Infosys Solusi Terpadu" }
+        ];
+
+        var container = document.getElementById("alumniContainer");
+        for (var i = 0; i < dataAlumni.length; i++) {
+            var a = dataAlumni[i];
+            var card = document.createElement("div");
+            card.className = "alumni-card";
+            card.innerHTML =
+                '<span class="badge">' + a.prodi + "</span>" +
+                "<h3>" + a.nama + ", " + a.gelar + "</h3>" +
+                "<p><strong>NIM:</strong> " + a.nim + "</p>" +
+                "<p><strong>Prodi:</strong> " + a.prodi + "</p>" +
+                "<p><strong>Perusahaan:</strong> " + a.pt + "</p>";
+            container.appendChild(card);
+        }
+
+        function filterAlumni() {
+            var keyword = document.getElementById("searchInput").value.toLowerCase();
+            var cards = container.getElementsByClassName("alumni-card");
+            for (var i = 0; i < cards.length; i++) {
+                var teksKartu = cards[i].textContent.toLowerCase();
+                if (teksKartu.indexOf(keyword) !== -1) {
+                    cards[i].style.display = "";
+                } else {
+                    cards[i].style.display = "none";
+                }
+            }
+        }
+
+        function kirimBiodata(e) {
+            e.preventDefault();
+            var namaVal = document.getElementById("namaLengkap").value.trim();
+            var hasilForm = document.getElementById("hasilForm");
+            if (namaVal !== "") {
+                hasilForm.textContent = "Data atas nama " + namaVal + " berhasil diperiksa pada formulir.";
+            } else {
+                hasilForm.textContent = "Silakan isi Nama Lengkap terlebih dahulu.";
+            }
+        }
+    </script>
+
+</body>
+</html>

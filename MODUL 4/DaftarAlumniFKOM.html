@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daftar Alumni - Modul 4 JavaScript</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 24px;
+            background-color: #fdf6f2;
+            color: #2c221e;
+        }
+        h2 {
+            color: #9a3f25;
+            margin-bottom: 6px;
+        }
+        #searchInput {
+            width: 100%;
+            max-width: 420px;
+            padding: 10px 14px;
+            margin: 14px 0 20px 0;
+            border: 1px solid #dfb9a8;
+            border-radius: 6px;
+            font-size: 14px;
+            background-color: #fffdfb;
+            color: #2c221e;
+        }
+        .alumni-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 16px;
+        }
+        .alumni-card {
+            background: #ffffff;
+            padding: 16px;
+            border-radius: 8px;
+            border: 1px solid #edd6cb;
+            box-shadow: 0 2px 5px rgba(154, 63, 37, 0.05);
+            transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+        }
+        .alumni-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(184, 80, 50, 0.16);
+            border-color: #c85a32;
+        }
+        .alumni-card h3 {
+            margin: 0 0 8px 0;
+            font-size: 16px;
+            color: #9a3f25;
+        }
+        .alumni-card p {
+            margin: 4px 0;
+            font-size: 13.5px;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Direktori Alumni</h2>
+    <p>Ketik nama, NIM, gelar, prodi (Sistem Informasi, Teknik Informatika, DKV, Teknik Sipil), atau perusahaan.</p>
+
+    <input type="text" id="searchInput" placeholder="Cari alumni...">
+
+    <div class="alumni-container" id="alumniContainer"></div>
+
+    <script>
+        const dataAlumni = [
+            { nama: "Aldi Nur Akbar", nim: "20250910079", gelar: "S.Kom.", prodi: "Sistem Informasi", pt: "PT Bank Central Asia Tbk" },
+            { nama: "Ardika Surya Pratama", nim: "20250910049", gelar: "S.Kom.", prodi: "Teknik Informatika", pt: "PT Telkom Indonesia (Persero) Tbk" },
+            { nama: "Cindy Komalasari", nim: "20250910070", gelar: "S.Ds.", prodi: "DKV", pt: "PT Studio Kreatif Nusantara" },
+            { nama: "Delcio Da Silva Carvalho", nim: "20250910093", gelar: "S.T.", prodi: "Teknik Sipil", pt: "PT Wijaya Karya (Persero) Tbk" },
+            { nama: "Dwi Febriyanti", nim: "20250910062", gelar: "S.Kom.", prodi: "Sistem Informasi", pt: "PT GoTo Gojek Tokopedia Tbk" },
+            { nama: "Enggar Bintang Maha Putra", nim: "20250910077", gelar: "S.Kom.", prodi: "Teknik Informatika", pt: "PT Solusi Digital Mandiri" },
+            { nama: "Fabian Febry Satrio", nim: "20250910030", gelar: "S.Ds.", prodi: "DKV", pt: "PT Visual Media Kreasi" },
+            { nama: "Fabio Alifabiandra", nim: "20250910028", gelar: "S.Kom.", prodi: "Sistem Informasi", pt: "PT Astra Graphia Tbk" },
+            { nama: "Fahmi Daris Fauzan", nim: "20250910018", gelar: "S.Kom.", prodi: "Teknik Informatika", pt: "PT Bukalapak.com Tbk" },
+            { nama: "Ignatius Dadi Ahadiyat", nim: "20250910002", gelar: "S.T.", prodi: "Teknik Sipil", pt: "PT PP (Persero) Tbk" },
+            { nama: "Ikmar Falih Darussalam", nim: "20250910085", gelar: "S.Kom.", prodi: "Sistem Informasi", pt: "PT Bank Rakyat Indonesia (Persero) Tbk" },
+            { nama: "Khairinnissa", nim: "20250910015", gelar: "S.Kom.", prodi: "Sistem Informasi", pt: "PT Nusantara Agro Digital" },
+            { nama: "Mohamad Iqbal Abdul Aziz", nim: "20250910037", gelar: "S.Kom.", prodi: "Teknik Informatika", pt: "PT XL Axiata Tbk" },
+            { nama: "Muhamad Ainur Rofiq", nim: "20250910061", gelar: "S.Ds.", prodi: "DKV", pt: "PT Ruang Karya Desain" },
+            { nama: "Muhamad Mickdad", nim: "20250910012", gelar: "S.T.", prodi: "Teknik Sipil", pt: "PT Adhi Karya (Persero) Tbk" },
+            { nama: "Muhammad Rizki", nim: "20250910075", gelar: "S.Kom.", prodi: "Teknik Informatika", pt: "PT Indosat Ooredoo Hutchison Tbk" },
+            { nama: "Nazwa Dwifa Ramadani", nim: "20250910059", gelar: "S.Ds.", prodi: "DKV", pt: "PT Cipta Grafika Indonesia" },
+            { nama: "Novita Lestari", nim: "20250910082", gelar: "S.Kom.", prodi: "Sistem Informasi", pt: "PT Bank Mandiri (Persero) Tbk" },
+            { nama: "Raihan Raka Alfarizi", nim: "20250910073", gelar: "S.Kom.", prodi: "Teknik Informatika", pt: "PT Metrodata Electronics Tbk" },
+            { nama: "Reinna Valogina", nim: "20250910065", gelar: "S.Ds.", prodi: "DKV", pt: "PT Karsa Visual Studio" },
+            { nama: "Rizal Fadilah", nim: "20250910084", gelar: "S.T.", prodi: "Teknik Sipil", pt: "PT Hutama Karya (Persero)" },
+            { nama: "Rohmat Hidayat Mauludin", nim: "20250910029", gelar: "S.Kom.", prodi: "Sistem Informasi", pt: "PT Daya Adicipta Motora" },
+            { nama: "Ropiyul Karim", nim: "20250910009", gelar: "S.T.", prodi: "Teknik Sipil", pt: "PT Waskita Karya (Persero) Tbk" },
+            { nama: "Yessa Tamelia", nim: "20250910020", gelar: "S.Ds.", prodi: "DKV", pt: "PT Suara Kreatif Indonesia" },
+            { nama: "Yohanes Ricky", nim: "20250910098", gelar: "S.Kom.", prodi: "Teknik Informatika", pt: "PT Infosys Solusi Terpadu" }
+        ];
+
+        const container = document.getElementById("alumniContainer");
+        const searchInput = document.getElementById("searchInput");
+
+        for (let i = 0; i < dataAlumni.length; i++) {
+            const a = dataAlumni[i];
+            const card = document.createElement("div");
+            card.className = "alumni-card";
+            card.innerHTML =
+                "<h3>" + a.nama + ", " + a.gelar + "</h3>" +
+                "<p><strong>NIM:</strong> " + a.nim + "</p>" +
+                "<p><strong>Prodi:</strong> " + a.prodi + "</p>" +
+                "<p><strong>Perusahaan:</strong> " + a.pt + "</p>";
+            container.appendChild(card);
+        }
+
+        function jalankanFilter() {
+            const keyword = searchInput.value.toLowerCase();
+            const cards = container.getElementsByClassName("alumni-card");
+
+            for (let i = 0; i < cards.length; i++) {
+                const teksKartu = cards[i].textContent.toLowerCase();
+                if (teksKartu.indexOf(keyword) !== -1) {
+                    cards[i].style.display = "";
+                } else {
+                    cards[i].style.display = "none";
+                }
+            }
+        }
+
+        searchInput.addEventListener("input", jalankanFilter);
+        searchInput.addEventListener("keyup", jalankanFilter);
+    </script>
+
+</body>
+</html>
